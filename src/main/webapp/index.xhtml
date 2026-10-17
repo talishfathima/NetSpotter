@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>NetSpotter | Network Quality Map</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Explore and map mobile network quality by location." />
+
+    <!-- NetSpotter stylesheet -->
+    <link rel="stylesheet" href="#{request.contextPath}/css/style.css" />
+
+    <!-- Leaflet stylesheet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Leaflet JavaScript library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</h:head>
+
+<h:body>
+    <!-- Header -->
+    <header>
+        <h2>NetSpotter</h2>
+        <p>Explore mobile network quality around you</p>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <h1>Understand Your Network Coverage</h1>
+
+        <p class="description">
+            Discover and compare mobile network performance
+            in different locations.
+        </p>
+
+        <!-- Location detection -->
+        <button type="button" onclick="getLocation()">
+            Detect My Location
+        </button>
+
+        <p id="status" role="status" aria-live="polite">
+            Click the button to detect your location.
+        </p>
+
+        <!-- Interactive map -->
+        <div id="map" role="region" aria-label="Interactive network quality map">
+        </div>
+
+        <section id="measurement-form">
+            <h2>Submit a Network Measurement</h2>
+
+            <p class="description">Detect your location first, then enter your network details.</p>
+
+            <form id="measurementForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="provider">Network Provider</label>
+                        <input type="text" id="provider" name="provider" placeholder="e.g. Airtel, Jio, Vodafone Idea"
+                            required="required" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="networkType">Network Type</label>
+                        <select id="networkType" name="networkType" required="required">
+                            <option value="">Select network type</option>
+                            <option value="3G">3G</option>
+                            <option value="4G">4G</option>
+                            <option value="5G">5G</option>
+                            <option value="Wi-Fi">Wi-Fi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Save Measurement</button>
+                    <p id="saveStatus" role="status" aria-live="polite"></p>
+                </div>
+            </form>
+        </section>
+
+        <section id="speed-test">
+            <h2>Network Speed Test</h2>
+
+            <p class="description">
+                Test your connection's download speed, upload speed,
+                and response time.
+            </p>
+
+            <button type="button" id="startSpeedTest">
+                Run Speed Test
+            </button>
+
+            <p id="speedTestStatus" role="status" aria-live="polite">
+                Ready to test your connection.
+            </p>
+
+            <div id="speedTestResults">
+                <div class="speed-result">
+                    <span>Download</span>
+                    <strong id="downloadResult">--</strong>
+                    <small>Mbps</small>
+                </div>
+
+                <div class="speed-result">
+                    <span>Upload</span>
+                    <strong id="uploadResult">--</strong>
+                    <small>Mbps</small>
+                </div>
+
+                <div class="speed-result">
+                    <span>Latency</span>
+                    <strong id="latencyResult">--</strong>
+                    <small>ms</small>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        NetSpotter — Mapping network quality by location
+    </footer>
+
+    <!-- NetSpotter map and geolocation logic -->
+    <script src="#{request.contextPath}/js/map.js"></script>
+</h:body>
+
+</html>
